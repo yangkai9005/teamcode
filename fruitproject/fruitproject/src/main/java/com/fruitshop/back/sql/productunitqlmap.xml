@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 商品单位SQL -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.ProductUnit">
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap type="ProductUnit" id="productUnit">
+		<id property="unitId" javaType="String" column="unit_id"
+			jdbcType="INTEGER" />
+		<result property="unitName" column="unit_name" />
+		<result property="unitValue" column="unit_value" />
+	</resultMap>
+	<select id="getallproductunit" flushCache="false"
+		resultMap="productUnit" useCache="true">
+		SELECT unit_id,unit_name,unit_value FROM product_unit_t
+	</select>
+	<insert id="addproductunit" flushCache="true"
+		parameterType="ProductUnit">
+		INSERT INTO product_unit_t
+		VALUES(#{unitId},#{unitName},#{unitValue})
+	</insert>
+	<update id="updateproductunit" flushCache="true"
+		parameterType="ProductUnit">
+		UPDATE product_unit_t SET
+		unit_name=#{unitName},unit_value=#{unitValue} WHERE
+		unit_id=#{unitId}
+
+	</update>
+	<delete id="delproductUnit" flushCache="true"
+		parameterType="String">
+		DELETE FROM product_unit_t WHERE unit_id=#{unitId}
+	</delete>
+</mapper>

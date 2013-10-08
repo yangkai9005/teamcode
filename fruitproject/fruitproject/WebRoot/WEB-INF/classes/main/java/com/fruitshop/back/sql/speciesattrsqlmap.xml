@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 权限SQL映射 -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.SpeciesAttr">
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap type="SpeciesAttr" id="speciesAttr">
+		<id property="speciesAttrId" javaType="String"
+			column="species_attr_id" jdbcType="INTEGER" />
+		<result property="speciesAttrName" column="species_attr_name" />
+		<result property="speciesAttrFlag" column="species_attr_flag" />
+		<result property="productSpeciesId" javaType="String"
+			column="product_species_id" jdbcType="INTEGER" />
+	</resultMap>
+	<!-- 批量添加权限 -->
+	<insert id="addBatchSpeciesAttr" flushCache="true">
+		INSERT INTO
+		product_species_attr_t(species_attr_name,species_attr_flag,product_species_id)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.speciesAttrName},#{item.speciesAttrFlag},#{item.productSpeciesId})
+		</foreach>
+	</insert>
+	<!-- 通过speciesId查询所有属性 -->
+	<select id="getAttrBySpeciesId" useCache="true"
+		resultMap="speciesAttr" parameterType="String">
+		SELECT
+		species_attr_id,species_attr_name,species_attr_flag,product_species_id
+		FROM product_species_attr_t WHERE
+		product_species_id=#{speciesId}
+
+	</select>
+	<delete id="delAttr" flushCache="true" parameterType="String">
+		DELETE FROM product_species_attr_t WHERE
+		species_attr_id=#{speciesAttrId}
+	</delete>
+	<!-- 批量删除 -->
+	<delete id="delBatchAttr" flushCache="true">
+		DELETE FROM product_species_attr_t WHERE species_attr_id IN
+		<foreach collection="list" index="index" item="attr" open="("
+			separator="," close=")">
+			#{attr.speciesAttrId}
+		</foreach>
+	</delete>
+
+	<update id="updateAttrInfor" flushCache="true"
+		parameterType="SpeciesAttr">
+		UPDATE product_species_attr_t SET
+		species_attr_name=#{speciesAttrName},species_attr_flag=#{speciesAttrFlag},product_species_id=#{productSpeciesId}
+		WHERE species_attr_id=#{speciesAttrId}
+	</update>
+
+</mapper>

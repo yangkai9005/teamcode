@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 权限SQL映射 -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.Test">
+	<resultMap type="main.java.com.fruitshop.back.po.Test" id="test">
+		<id property="testId" javaType="String"
+			column="test_id" jdbcType="INTEGER" />
+		<result property="testName" column="test_name" />
+	</resultMap>
+	<!-- 单量添加菜单 -->
+	<insert id="addTest1" parameterType="main.java.com.fruitshop.back.po.Test"
+		flushCache="true">
+		INSERT INTO test_t_1(test_name)
+		VALUES(#{testName})
+	</insert>
+	<insert id="addTest2" parameterType="main.java.com.fruitshop.back.po.Test"
+		flushCache="true">
+		INSERT INTO test_t_2(test_name)
+		VALUES(#{testName})
+	</insert>
+	
+	<delete id="delTest1" parameterType="String"
+		flushCache="true">
+		DELETE FROM test_t_1 WHERE
+		test_id=#{testId}
+	</delete>
+	
+	<delete id="delTest2" parameterType="String"
+		flushCache="true">
+		DELETE FROM test_t_2 WHERE
+		test_id=#{testId}
+	</delete>
+
+	<update id="updateTest1" parameterType="main.java.com.fruitshop.back.po.Test"
+		flushCache="true">
+		UPDATE test_t_1 SET
+		test_name=#{testName}
+		WHERE test_id=#{testId}
+	</update>
+		<update id="updateTest2" parameterType="main.java.com.fruitshop.back.po.Test"
+		flushCache="true">
+		UPDATE test_t_2 SET
+		test_name=#{testName}
+		WHERE test_id=#{testId}
+	</update>
+
+	
+</mapper>

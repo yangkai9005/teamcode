@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 权限SQL映射 -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.User">
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap type="User" id="user">
+		<id property="systemUserId" javaType="String"
+			column="system_user_id" jdbcType="INTEGER" />
+		<result property="systemUserName" column="system_user_name" />
+		<result property="systemUserPwd" column="system_user_pwd" />
+		<result property="SystemAuthId" javaType="String"
+			column="system_auth_id" jdbcType="INTEGER" />
+		<association property="auth" resultMap="auth" javaType="Auth"></association>
+	</resultMap>
+
+	<resultMap type="Auth" id="auth">
+		<id property="systemAuthId" javaType="String"
+			column="system_auth_id" jdbcType="INTEGER" />
+		<result property="systemAuthName" column="system_auth_name" />
+		<result property="systemAuthLevel" column="system_auth_level" />
+		<result property="systemAuthDesc" column="system_auth_desc" />
+	</resultMap>
+	<select id="findAllUser" flushCache="false" resultMap="user"
+		useCache="true">
+		SELECT
+		u.system_user_id,u.system_user_name,u.system_user_pwd,u.system_auth_id,a.system_auth_id,a.system_auth_name,a.system_auth_level,a.system_auth_desc
+		FROM system_user_t u LEFT JOIN system_auth_t a ON
+		a.system_auth_id=u.system_auth_id
+	</select>
+	<insert id="addUser" parameterType="User" flushCache="true">
+		INSERT INTO system_user_t
+		VALUES(#{systemUserId},#{systemUserName},#{systemUserPwd},#{SystemAuthId})
+	</insert>
+
+	<delete id="delUser" parameterType="String" flushCache="true">
+		DELETE FROM system_user_t WHERE system_user_id=#{userId}
+	</delete>
+
+	<select id="getUserByUserName" parameterType="String"
+		resultMap="user" flushCache="false">
+		SELECT
+		system_user_id,system_user_name,system_user_pwd,system_auth_id
+		FROM system_user_t WHERE system_user_name=#{systemUserName}
+	</select>
+</mapper>

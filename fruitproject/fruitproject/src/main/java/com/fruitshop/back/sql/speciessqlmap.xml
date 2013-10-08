@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 权限SQL映射 -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.Species">
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap type="Species" id="species">
+		<id property="productSpeciesId" javaType="String"
+			column="product_species_id" jdbcType="INTEGER" />
+		<result property="productSpeciesName"
+			column="product_species_name" />
+		<result property="productSpeciesValue"
+			column="product_species_value" />
+		<collection property="attrList" ofType="SpeciesAttr" resultMap="speciesAttr" />
+	</resultMap>
+	<resultMap type="SpeciesAttr" id="speciesAttr">
+		<id property="speciesAttrId" javaType="String"
+			column="species_attr_id" jdbcType="INTEGER" />
+		<result property="speciesAttrName" column="species_attr_name" />
+		<result property="speciesAttrFlag" column="species_attr_flag" />
+		<result property="productSpeciesId" javaType="String"
+			column="product_species_id" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="findAllSpecies" flushCache="false" resultMap="species"
+		useCache="true">
+		SELECT
+		p.product_species_id,p.product_species_name,p.product_species_value,a.species_attr_id,a.species_attr_name,a.species_attr_flag
+		FROM product_species_t p LEFT JOIN product_species_attr_t a ON
+		p.product_species_id=a.product_species_id
+	</select>
+	<insert id="addSpecies" flushCache="true" parameterType="Species">
+		INSERT INTO product_species_t
+		VALUES(#{productSpeciesId},#{productSpeciesValue},#{productSpeciesName})
+	</insert>
+</mapper>

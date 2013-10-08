@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+
+		<title>酷爱水果销售后台管理系统</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<link href="css/norm.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript">
+			function addOptions(){
+			var addIndex=0;
+			var delIndex=0;
+			var addOptions=new Array();
+		    var delOptions=new Array();
+		    var allOptions=$("#all option");//最后已经拥有的权限
+		    var otherOptions=$("#other option");
+		    for(i=0;i<allOptions.length;i++){//开始加载的时候所有已经有的权限
+		    	var val1=allOptions[i].value;
+		    	if(!checkExist(allHavaOptions,val1)){//如果在之前的权限中不存在，则需要继续判断
+		    		if(checkExist(otherOptions,val1)){//如果在其他权限栏目中则需要删除现有的权限
+		    			delOptions[delIndex];
+		    			delIndex++;
+		    		}
+		    		else{//否则需要添加到新的权限列表当中
+		    			addOptions[addIndex];
+		    			addIndex++;
+		    		}
+		    	}
+		    }
+		    
+		    alert(addOptions.length);
+		    alert(delOptions.length);
+		}
+		</script>
+	
+	</head>
+
+	<body >
+	<form action="" ></form>
+		<div class="ban">
+			<div class="ban_1">
+				系统欢迎界面
+			</div>
+		</div>
+		<div>
+			<table width="90%" id="mytab" border="1" class="t1">
+				<thead>
+					<th width="10%">
+						网名
+					</th>
+					<th width="30%">
+						博客
+					</th>
+					<th width="20%">
+						电邮
+					</th>
+					<th width="30%">
+						网络硬盘
+					</th>
+					<th width="10%">
+						QQ
+					</th>
+				</thead>
+				<tr class="a1">
+					<td >
+						<img alt="">
+					</td>
+					<td>
+						http://blog.csdn.net/wallimn
+					</td>
+					<td>
+						wallimn@tom.com
+					</td>
+					<td>
+						http://wallimn.ys168.com
+					</td>
+					<td>
+						54871876
+					</td>
+				</tr>
+				<tr>
+					<td style="display: none;">
+						长三江
+					</td>
+					<td>
+						村在
+					</td>
+					<td>
+						北京天安门
+					</td>
+					<td>
+					<textarea rows="5" cols="10"></textarea>
+						东四十条
+					</td>
+					<td>
+						21345678
+					</td>
+				</tr>
+				<tr class="a1">
+					<td>
+						长三江
+					</td>
+					<td>
+						村在
+					</td>
+					<td>
+						北京天安门
+					</td>
+					<td>
+						东四十条
+					</td>
+					<td>
+						21345678
+					</td>
+				</tr>
+				<tr>
+					<td>
+						长三江
+					</td>
+					<td>
+						村在
+					</td>
+					<td>
+						北京天安门
+					</td>
+					<td>
+						东四十条
+					</td>
+					<td>
+						21345678
+					</td>
+				</tr>
+				<tr class="a1">
+					<td>
+						wallimn
+					</td>
+					<td>
+						http://blog.csdn.net/wallimn
+					</td>
+					<td>
+						wallimn@tom.com
+					</td>
+					<td>
+						http://wallimn.ys168.com
+					</td>
+					<td>
+						54871876
+					</td>
+				</tr>
+				<tr>
+					<td >
+						长三江
+					</td>
+					<td>
+						村在
+					</td>
+					<td>
+						北京天安门
+					</td>
+					<td>
+						东四十条
+					</td>
+					<td>
+						21345678
+					</td>
+				</tr>
+				<tr class="a1">
+					<td>
+						长三江
+					</td>
+					<td>
+						村在
+					</td>
+					<td>
+						北京天安门
+					</td>
+					<td>
+						东四十条
+					</td>
+					<td>
+						21345678
+					</td>
+				</tr>
+				<tr>
+					<td>
+						长三江
+					</td>
+					<td>
+						村在
+					</td>
+					<td>
+						北京天安门
+					</td>
+					<td>
+						东四十条
+					</td>
+					<td>
+						21345678
+						<input type="button" disabled="disabled" onblur="" >
+					</td>
+					
+				</tr>
+			</table>
+			<form action="" onsubmit=""></form>
+		</div>
+		
+		
+		
+	</body>
+</html>

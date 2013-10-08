@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 权限SQL映射 -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.MenuChild">
+	<resultMap type="MenuChild" id="menuChild">
+		<id property="menuChildId" javaType="String"
+			column="menu_child_id" jdbcType="INTEGER" />
+		<result property="menuChildName" column="menu_child_name" />
+		<result property="menuChildAddr" column="menu_child_addr" />
+		<result property="menuId" javaType="String" column="menu_id" jdbcType="INTEGER" />
+	</resultMap>
+	<!-- 单量添加菜单 -->
+	<insert id="addMenuChild" parameterType="MenuChild"
+		flushCache="true">
+		INSERT INTO system_menu_child_t
+		VALUES(#{menuChildId},#{menuChildName},#{menuChildAddr},#{menuId})
+	</insert>
+	<!-- 批量添加子菜单 -->
+	<insert id="addMenuChildBatch" flushCache="true">
+		INSERT INTO system_menu_child_t VALUES
+		<foreach collection="list" item="child"  separator=","
+			index="index">
+			(#{child.menuChildId},#{child.menuChildName},#{child.menuChildAddr},#{child.menuId})
+		</foreach>
+	</insert>
+	<!-- 单量删除菜单 -->
+	<delete id="delMenuChild" parameterType="String"
+		flushCache="true">
+		DELETE FROM system_menu_child_t WHERE
+		menu_child_id=#{menuChildId}
+	</delete>
+	
+	<!-- 单量删除菜单 -->
+	<delete id="delMenuChildByMenuId" parameterType="String"
+		flushCache="true">
+		DELETE FROM system_menu_child_t WHERE
+		menu_id=#{menuId}
+	</delete>
+
+	<!-- 批量删除菜单 -->
+	<delete id="delMenuChildBatch" flushCache="true">
+		DELETE FROM system_menu_child_t WHERE menu_child_id IN
+		<foreach collection="list" index="index" item="childId" open="("
+			separator="," close=")">
+			#{childId}
+		</foreach>
+	</delete>
+
+	<select id="findMenuChildByMenuId" parameterType="String"
+		flushCache="false" resultMap="menuChild">
+		SELECT menu_child_id,menu_child_name,menu_child_addr,menu_id
+		FROM system_menu_child_t WHERE menu_id=#{menuId}
+	</select>
+
+	<select id="findMenuChildByMenuChildId" parameterType="String"
+		flushCache="false" resultMap="menuChild">
+		SELECT menu_child_id,menu_child_name,menu_child_addr,menu_id
+		FROM system_menu_child_t WHERE menu_child_id=#{menuChildId}
+	</select>
+	<update id="updateMenuChild" parameterType="MenuChild"
+		flushCache="true">
+		UPDATE system_menu_child_t SET
+		menu_child_name=#{menuChildName},menu_child_addr=#{menuChildAddr}
+		WHERE menu_child_id=#{menuChildId}
+	</update>
+
+	<update id="updateMenuChildBatch" flushCache="true">
+	<foreach collection="list" index="index" item="child" separator=";">
+	UPDATE system_menu_child_t SET
+		menu_child_name=#{child.menuChildName},menu_child_addr=#{child.menuChildAddr}
+		WHERE menu_child_id=#{child.menuChildId}
+		</foreach>
+		<!--  UPDATE system_menu_child_t
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="menu_child_name=" suffix=",">
+				<foreach collection="list" index="index"
+					item="child1" >
+					#{child1.menuChildName}
+				</foreach>
+			</trim>
+
+			<trim prefix="menu_child_addr=" suffix=",">
+				<foreach collection="list" index="index"
+					item="child2" >
+					#{child2.menuChildName}
+				</foreach>
+			</trim>
+		</trim>
+		where menu_child_id=
+		<foreach collection="list" index="index" item="child3" >
+			#{child3.menuChildId}
+		</foreach>
+		-->
+	</update>
+	
+</mapper>

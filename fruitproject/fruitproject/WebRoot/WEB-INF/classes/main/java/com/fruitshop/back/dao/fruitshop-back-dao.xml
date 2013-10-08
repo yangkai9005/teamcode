@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+	<bean id="authDao" class="main.java.com.fruitshop.back.dao.AuthDao">
+	</bean>
+	
+	<bean id="authMenuDao" class="main.java.com.fruitshop.back.dao.AuthMenuDao">
+	</bean>
+	<bean id="userDao" class="main.java.com.fruitshop.back.dao.UserDao"></bean>
+	<bean id="menuDao" class="main.java.com.fruitshop.back.dao.MenuDao">
+	</bean>
+	<bean id="menuChildDao" class="main.java.com.fruitshop.back.dao.MenuChildDao">
+	</bean>
+	<bean id="speciesDao" class="main.java.com.fruitshop.back.dao.SpeciesDao">
+	</bean>
+	<bean id="speciesAttrDao" class="main.java.com.fruitshop.back.dao.SpeciesAttrDao">
+	</bean>
+	<bean id="productUnitDao" class="main.java.com.fruitshop.back.dao.ProductUnitDao">
+	</bean>
+	
+	<bean id="businessDao" class="main.java.com.fruitshop.back.dao.BusinessDao">
+	</bean>
+	<bean id="test1Dao" class="main.java.com.fruitshop.back.dao.Test1Dao"/>
+	<bean id="test2Dao" class="main.java.com.fruitshop.back.dao.Test2Dao"/>
+</beans>

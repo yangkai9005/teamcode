@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 权限SQL映射 -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.Auth">
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap type="Auth" id="auth">
+		<id property="systemAuthId" javaType="String"
+			column="system_auth_id" jdbcType="INTEGER" />
+		<result property="systemAuthName" column="system_auth_name" />
+		<result property="systemAuthLevel" column="system_auth_level" />
+		<result property="systemAuthDesc" column="system_auth_desc" />
+		<collection property="menus" ofType="Menu" resultMap="menu" />
+	</resultMap>
+	<resultMap type="Menu" id="menu">
+		<id property="menuId" javaType="String" column="menu_id"
+			jdbcType="INTEGER" />
+		<result property="menuName" column="menu_name" />
+	</resultMap>
+	<select id="findAllAuth" flushCache="false" resultMap="auth"
+		useCache="true">
+		SELECT
+		a.system_auth_id,a.system_auth_name,a.system_auth_level,a.system_auth_desc,ma.menu_id,ma.menu_name
+		FROM system_auth_t a LEFT JOIN (SELECT
+		m.menu_id,m.menu_name,a.system_auth_id from system_menu_t
+		m,system_auth_menu_t a where m.menu_id=a.system_menu_id) ma ON
+		a.system_auth_id=ma.system_auth_id
+	</select>
+
+	<select id="findAuthById" parameterType="String" flushCache="false"
+		resultMap="auth" useCache="true">
+		SELECT
+		a.system_auth_id,a.system_auth_name,a.system_auth_level,a.system_auth_desc,ma.menu_id,ma.menu_name
+		FROM system_auth_t a LEFT JOIN (SELECT
+		m.menu_id,m.menu_name,a.system_auth_id from system_menu_t
+		m,system_auth_menu_t a where m.menu_id=a.system_menu_id) ma ON
+		a.system_auth_id=ma.system_auth_id where a.system_auth_id=#{authId}
+	</select>
+
+	<update id="updateAuth" parameterType="Auth" flushCache="true">
+		UPDATE system_auth_t SET
+		system_auth_name=#{systemAuthName},system_auth_level=#{systemAuthLevel},system_auth_desc=#{systemAuthDesc}
+		WHERE system_auth_id=#{systemAuthId}
+	</update>
+
+	<insert id="addAuth" parameterType="Auth" flushCache="true">
+		INSERT INTO system_auth_t
+		VALUES(#{systemAuthId},#{systemAuthName},#{systemAuthLevel},#{systemAuthDesc})
+	</insert>
+
+	<delete id="delAuth" parameterType="String" flushCache="true">
+		DELETE FROM system_auth_t WHERE system_auth_id=#{authId}
+	</delete>
+
+	<select id="getAuthByLevelOrName" parameterType="Auth"
+		flushCache="false" useCache="true" resultMap="auth">
+		SELECT
+		system_auth_id,system_auth_name,system_auth_level,system_auth_desc
+		FROM system_auth_t WHERE system_auth_level=#{systemAuthLevel} or
+		system_auth_name=#{systemAuthName}
+	</select>
+	<!-- 批量添加权限 -->
+	<insert id="inserAuthBatch" flushCache="true">
+		INSERT INTO system_auth_t VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.systemAuthId},#{item.systemAuthName},#{item.systemAuthLevel},#{item.systemAuthDesc})
+		</foreach>
+	</insert>
+	<!-- 添加权限和菜单对应的关系 -->
+	<insert id="addAuthAndMenu" flushCache="true">
+		INSERT INTO system_auth_menu_t(system_auth_id,system_menu_id)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.systemAuthId},#{item.systemMenuId})
+		</foreach>
+	</insert>
+
+	<!--删除权限和菜单对应的关系 -->
+	<insert id="delAuthAndMenu" flushCache="true">
+		DELETE FROM system_auth_menu_t WHERE menu_auth_id IN
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			SELECT a.menu_auth_id FROM ( SELECT menu_auth_id FROM
+			system_auth_menu_t WHERE system_auth_id=#{item.systemAuthId}
+			AND system_menu_id=#{item.systemMenuId}) a
+		</foreach>
+	</insert>
+	<!-- 批量删除权限 -->
+	<delete id="delAuthBatch" flushCache="true">
+		DELETE FROM system_auth_t WHERE system_auth_id IN
+		<foreach collection="list" index="index" item="authId" open="("
+			separator="," close=")">
+			#{authId}
+		</foreach>
+	</delete>
+</mapper>

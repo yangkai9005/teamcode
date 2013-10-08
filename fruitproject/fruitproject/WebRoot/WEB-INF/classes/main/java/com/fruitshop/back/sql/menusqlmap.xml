@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 权限SQL映射 -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.Menu">
+	<resultMap type="Menu" id="menu">
+		<id property="menuId" javaType="String" column="menu_id"
+			jdbcType="INTEGER" />
+		<result property="menuName" column="menu_name" />
+		<collection property="menuChilds" ofType="MenuChild"
+			resultMap="menuChild" />
+	</resultMap>
+	<resultMap type="MenuChild" id="menuChild">
+		<id property="menuChildId" javaType="String"
+			column="menu_child_id" jdbcType="INTEGER" />
+		<result property="menuChildName" column="menu_child_name" />
+		<result property="menuChildAddr" column="menu_child_addr" />
+		<result property="menuId" javaType="String" column="menu_id"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<select id="findAllMenu" flushCache="false" resultMap="menu"
+		useCache="true">
+		SELECT
+		m.menu_id,m.menu_name,c.menu_child_id,c.menu_child_name,c.menu_child_addr,c.menu_id
+		FROM system_menu_t m left join system_menu_child_t c on
+		c.menu_id=m.menu_id
+	</select>
+	<insert id="addMenu" parameterType="Menu" flushCache="true">
+		INSERT INTO system_menu_t
+		VALUES(#{menuId},#{menuName})
+	</insert>
+	<!-- 批量插入 -->
+	<insert id="addMenuBatch" flushCache="true">
+		INSERT INTO system_menu_t VALUES
+		<foreach collection="list" index="index" item="menu"
+			separator=",">
+			(#{menu.menuId},#{menu.menuName})
+		</foreach>
+	</insert>
+
+	<delete id="delMenu" parameterType="String" flushCache="true">
+		DELETE FROM system_menu_t WHERE menu_id=#{menuId}
+	</delete>
+
+	<delete id="delMenuBatch" flushCache="true">
+		DELETE FROM system_menu_t WHERE menu_id IN
+		<foreach collection="list" index="index" item="menuId" open="("
+			separator="," close=")">
+			#{menuId}
+		</foreach>
+	</delete>
+
+	<select id="findMenuByAuthId" parameterType="String"
+		flushCache="false" resultMap="menu">
+		SELECT
+		ma.menu_id,ma.menu_name,ma.system_auth_id,c.menu_child_id,c.menu_child_name,c.menu_child_addr,c.menu_id
+		FROM (SELECT m.menu_id,m.menu_name,a.system_auth_id FROM
+		system_menu_t m,system_auth_menu_t a where
+		m.menu_id=a.system_menu_id and a.system_auth_id=#{authId}) ma
+		left join system_menu_child_t c on c.menu_id=ma.menu_id
+	</select>
+
+	<select id="findMenuByMenuId" parameterType="String"
+		flushCache="false" resultType="menu">
+		SELECT
+		m.menu_id,m.menu_name,c.menu_child_id,c.menu_child_name,c.menu_child_addr,c.menu_id
+		FROM system_menu_t m left join system_menu_child_t c on
+		c.menu_id=m.menu_id WHERE m.menu_id=#{menuId}
+	</select>
+	
+	<select id="findMenuByNotInAuthId" parameterType="String"  resultMap="menu" useCache="true">
+	SELECT menu_id,menu_name FROM system_menu_t WHERE menu_id NOT IN(SELECT system_menu_id FROM system_auth_menu_t WHERE system_auth_id=#{authId})
+	</select>
+
+
+</mapper>

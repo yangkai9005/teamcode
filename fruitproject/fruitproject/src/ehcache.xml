@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<!-- Sets the path to the directory where cache .data files are created. If the path is a Java System Property it is replaced by its value in the running VM. The following properties are translated: user.home - User's home directory user.dir - User's current working directory java.io.tmpdir - Default temp file path -->
+	<diskStore path="java.io.tmpdir" />
+	<!--Default Cache configuration. These will applied to caches programmatically created through the CacheManager. The following attributes are required: maxElementsInMemory - Sets the maximum number of objects that will be created in memory eternal - Sets whether elements are eternal. If eternal, timeouts are ignored and the element is never expired. overflowToDisk - Sets whether elements can overflow to disk when the in-memory cache has reached the maxInMemory limit. The following attributes are optional: timeToIdleSeconds - Sets the time to idle for an element before it expires. i.e. The maximum amount of time between accesses before an element expires Is only used if the element is not eternal. Optional attribute. A value of 0 means that an Element can idle for infinity. The default value is 0. timeToLiveSeconds - Sets the time to live for an element before it expires. i.e. The maximum time between creation time and when an element expires. Is only used if the element is not eternal. Optional attribute. A value of 0 means that and Element can live for infinity. The default value is 0. diskPersistent - Whether the disk store persists between restarts of the Virtual Machine. The default value is false. diskExpiryThreadIntervalSeconds- The number of seconds between runs of the disk expiry thread. The default value is 120 seconds. -->
+	<!-- 
+		
+		必须要有的属性：
+		
+		name: cache的名字，用来识别不同的cache，必须惟一。
+		
+		maxElementsInMemory: 内存管理的缓存元素数量最大限值。
+		
+		maxElementsOnDisk: 硬盘管理的缓存元素数量最大限值。默认值为0，就是没有限制。
+		
+		eternal: 设定元素是否持久话。若设为true，则缓存元素不会过期。
+		
+		overflowToDisk: 设定是否在内存填满的时候把数据转到磁盘上。
+		下面是一些可选属性：
+		timeToIdleSeconds： 设定元素在过期前空闲状态的时间，只对非持久性缓存对象有效。默认值为0,值为0意味着元素可以闲置至无限长时间。
+		timeToLiveSeconds: 设定元素从创建到过期的时间。其他与timeToIdleSeconds类似。
+		diskPersistent: 设定在虚拟机重启时是否进行磁盘存储，默认为false.(我的直觉，对于安全小型应用，宜设为true)。
+		diskExpiryThreadIntervalSeconds: 访问磁盘线程活动时间。
+		diskSpoolBufferSizeMB: 存入磁盘时的缓冲区大小，默认30MB,每个缓存都有自己的缓冲区。
+		memoryStoreEvictionPolicy: 元素逐出缓存规则。共有三种，Recently Used (LRU)最近最少使用，为默认。 First In First Out (FIFO)，先进先出。Less Frequently Used(specified as LFU)最少使用
+	-->
+
+	<defaultCache diskExpiryThreadIntervalSeconds="120"
+		diskPersistent="false" timeToLiveSeconds="0" timeToIdleSeconds="0"
+		overflowToDisk="false" eternal="false" maxElementsInMemory="10000" />
+	<!-- 缓存一些菜单和子菜单信息 -->
+	<cache overflowToDisk="true" eternal="false"
+		timeToLiveSeconds="1800" timeToIdleSeconds="900"
+		maxElementsInMemory="500" name="fixedRegion">
+		<!-- <searchable> 这种方式的搜索只适合不写到文件中的缓存搜索
+			这个的方式是搜索key 
+			<searchAttribute name="age"/>
+			这样的方式是搜索value
+			<searchAttribute name="systemUserName" expression="value.getSystemUserName()"/>
+			<searchAttribute name="systemUserPwd" expression="value.getsystemUserPwd()"/>
+			</searchable>
+		-->
+	</cache>
+	<!-- 缓存一些商品信息 -->
+	<cache timeToLiveSeconds="600" timeToIdleSeconds="300"
+		overflowToDisk="true" eternal="false" maxElementsInMemory="500"
+		name="freqChangeRegion" />
+	<!-- 客户信息缓存,将客户缓存一周604800 -->
+	<cache overflowToDisk="true" eternal="false" timeToLiveSeconds="604800" timeToIdleSeconds="259200"
+		maxElementsInMemory="2000" name="custCache" />
+</ehcache>

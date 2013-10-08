@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 商品单位SQL -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.Business">
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap type="Business" id="business">
+		<id property="businessId" javaType="String" column="business_id"
+			jdbcType="INTEGER" />
+		<result property="businessName" column="business_name" />
+		<result property="businessPerson" column="business_person" />
+		<result property="businessTel" column="business_tel" />
+		<result property="businessAddr" column="business_addr" />
+		<result property="businessOpeartingRange" 
+			column="business_operating_range" />
+	</resultMap>
+	<select id="getallbusiness" flushCache="false" resultMap="business"
+		useCache="true">
+		SELECT
+		business_id,business_name,business_addr,business_person,business_tel,
+		business_operating_range FROM business_t
+	</select>
+
+	<select id="getbusinessbyid" flushCache="false" resultMap="business"
+		useCache="true" parameterType="String">
+		SELECT
+		business_id,business_name,business_addr,business_person,business_tel,
+		business_operating_range FROM business_t where
+		business_id=#{businessId}
+	</select>
+
+	<insert id="addbusiness" flushCache="true"
+		parameterType="Business">
+		INSERT INTO business_t
+		(business_name,business_addr,business_person,business_tel,
+		business_operating_range)
+		VALUES(#{businessName},#{businessAddr},#{businessPerson},#{businessTel},#{businessOpeartingRange})
+	</insert>
+	<update id="updatebusiness" flushCache="true"
+		parameterType="Business">
+		UPDATE business_t SET
+		business_name=#{businessName},business_addr=#{businessAddr},business_person=#{businessPerson},business_tel=#{businessTel},business_operating_range=#{businessOpeartingRange}
+		WHERE business_id=#{businessId}
+
+	</update>
+	<delete id="delbusiness" flushCache="true" parameterType="String">
+		DELETE FROM business_t WHERE business_id=#{businessId}
+	</delete>
+</mapper>

@@ -1,0 +1,126 @@
+body,table{
+		margin: 0px 0px;
+		padding: 0px 0px;
+		font-size:17px;
+		background-color: #D4DCD6;
+	}
+.txt {
+    color:#333;
+    line-height:normal;
+    font-family:"Microsoft YaHei",Tahoma,Verdana,SimSun;
+    font-style:normal;
+    font-variant:normal;
+    font-size-adjust:none;
+    font-stretch:normal;
+    font-weight:normal;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    
+    outline-width:medium;
+    outline-style:none;
+    outline-color:invert;
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+    text-shadow:0px 1px 2px #fff;
+    background-attachment:scroll;
+    background-repeat:repeat-x;
+    background-position-x:left;
+    background-position-y:top;
+    background-size:auto;
+    background-origin:padding-box;
+    background-clip:border-box;
+    margin-right:8px;
+    border-top-color:#ccc;
+    border-right-color:#ccc;
+    border-bottom-color:#ccc;
+    border-left-color:#ccc;
+    border-top-width:1px;
+    border-right-width:1px;
+    border-bottom-width:1px;
+    border-left-width:1px;
+    border-top-style:solid;
+    border-right-style:solid;
+    border-bottom-style:solid;
+    border-left-style:solid;
+}
+
+.txt:focus {
+     border: 1px solid #fafafa;
+    -webkit-box-shadow: 0px 0px 6px #007eff;
+     -moz-box-shadow: 0px 0px 5px #007eff;
+     box-shadow: 0px 0px 5px #007eff;   
+    
+}
+.txt font{
+		font-size: 5px;
+	}
+.ban{
+	background-image: url("../images/banner.jpg");
+	background-repeat: repeat-x;
+	width: 100%;
+	height: 6%;
+	overflow:hidden;
+	
+}
+.ban .ban_1{
+	width: 100%;
+	height: 100%;
+	font-weight: 700;
+}
+
+
+table{
+    table-layout:fixed;
+    empty-cells:show; 
+    border-collapse: collapse;
+    margin:0 auto;
+}
+td{
+    height:20px;
+    text-align: center;
+}
+
+
+
+/*这个是借鉴一个论坛的样式*/
+table.t1{
+    border:1px solid #cad9ea;
+    color:#666;
+}
+table.t1 th {
+    background-image: url(../images/banner.jpg);
+    background-repeat::repeat-x;
+    height:30px;
+}
+table.t1 td,table.t1 th{
+    border:1px solid #cad9ea;
+    padding:0 1em 0;
+}
+table.t1 tr.a1{
+    background-color:#f5fafe;
+}
+table.t1 td img{
+    cursor: pointer;
+}
+
+.btn{
+		border:0px;
+		font-size:17px;
+		font-weight: bold;
+		color: #FFFFFF;
+		cursor: pointer;
+	}
+a:link {text-decoration:none;color:#336600;font-weight: 600;}    /* 未被访问的链接 */
+a:visited {text-decoration:none;color:#336600} /* 已被访问的链接 */
+a:hover {text-decoration:none;color:#3399FF;}   /* 鼠标指针移动到链接上 */
+a:active {text-decoration:none;color:#336600}  /* 正在被点击的链接 */
+.del a:hover {text-decoration:none;color:#FF0000;}
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 商品单位SQL -->
+
+<mapper namespace="main.java.com.fruitshop.back.po.Product">
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap type="Product" id="product">
+		<id property="productId" javaType="String" column="product_id"
+			jdbcType="INTEGER" />
+		<result property="productName" column="product_name" />
+		<result property="productUnit" column="product_unit" />
+		<result property="productNum" column="product_num" />
+		<result property="productLevel" column="product_level" />
+		<result property="productSpecies" column="product_species" />
+		<result property="productPurchase" javaType="float" jdbcType="NUMERIC" column="product_purchase" />
+		<result property="productDate" javaType="Date" jdbcType="DATE" column="product_date" />
+		<result property="productDesc" column="product_desc" />
+	</resultMap>
+</mapper>

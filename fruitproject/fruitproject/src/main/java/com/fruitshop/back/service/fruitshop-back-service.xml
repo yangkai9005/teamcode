@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+	<!-- 自增长字段 -->
+	<bean id="incrval"
+		class="org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer">
+		<property name="incrementerName" value="primary_key_t" />
+		<property name="columnName" value="primary_key_id" />
+		<property name="cacheSize" value="1" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 用户服务ben -->
+	<bean id="userservice"
+		class="main.java.com.fruitshop.back.service.UserService">
+	</bean>
+	<!-- 权限服务ben -->
+	<bean id="authservice"
+		class="main.java.com.fruitshop.back.service.AuthService">
+	</bean>
+	<!-- 菜单服务ben -->
+	<bean id="menuservice"
+		class="main.java.com.fruitshop.back.service.MenuService">
+	</bean>
+	<!-- 子菜单服务ben -->
+	<bean id="menuchildservice"
+		class="main.java.com.fruitshop.back.service.MenuChildService">
+	</bean>
+	<!-- 种类服务ben -->
+	<bean id="speciesservice"
+		class="main.java.com.fruitshop.back.service.SpeciesService">
+	</bean>
+	
+	<!-- 种类属性服务ben -->
+	<bean id="speciesattrservice"
+		class="main.java.com.fruitshop.back.service.SpeciesAttrService">
+	</bean>
+	
+	<!-- 商品计量单位服务ben -->
+	<bean id="productunitservice"
+		class="main.java.com.fruitshop.back.service.ProductUnitService">
+	</bean>
+	
+	<!-- 商家服务ben -->
+	<bean id="businessservice"
+		class="main.java.com.fruitshop.back.service.BusinessService">
+	</bean>
+	<!-- 测试服务类 -->
+	<bean id="testservice1"
+		class="main.java.com.fruitshop.back.service.TestService1">
+	</bean>
+	<bean id="testservice2"
+		class="main.java.com.fruitshop.back.service.TestService2">
+	</bean>
+</beans>

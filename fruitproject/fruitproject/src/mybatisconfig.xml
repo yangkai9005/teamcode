@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+<typeAliases>
+<typeAlias type="main.java.com.fruitshop.back.po.Auth" alias="Auth" />
+<typeAlias type="main.java.com.fruitshop.back.po.Menu" alias="Menu" />
+<typeAlias type="main.java.com.fruitshop.back.po.MenuChild" alias="MenuChild" />
+<typeAlias type="main.java.com.fruitshop.back.po.User" alias="User" />
+<typeAlias type="main.java.com.fruitshop.back.po.Species" alias="Species" />
+<typeAlias type="main.java.com.fruitshop.back.po.SpeciesAttr" alias="SpeciesAttr" />
+<typeAlias type="main.java.com.fruitshop.back.po.Commodity" alias="Commodity" />
+<typeAlias type="main.java.com.fruitshop.back.po.CommodityComments" alias="CommodityComments" />
+<typeAlias type="main.java.com.fruitshop.back.po.CommodityImage" alias="CommodityImage" />
+<typeAlias type="main.java.com.fruitshop.back.po.CommodityPrice" alias="CommodityPrice" />
+<typeAlias type="main.java.com.fruitshop.back.po.Product" alias="Product" />
+<typeAlias type="main.java.com.fruitshop.back.po.ProductUnit" alias="ProductUnit" />
+<typeAlias type="main.java.com.fruitshop.back.po.Business" alias="Business" />
+</typeAliases>
+<mappers>
+<mapper resource="main/java/com/fruitshop/back/sql/authsqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/usersqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/menuchildsqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/menusqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/speciessqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/speciesattrsqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/productunitqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/businesssqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/testsqlmap.xml"/>
+</mappers>
+</configuration>
