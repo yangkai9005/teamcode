@@ -32,6 +32,6 @@
 				<frame>
 				<frame>
 			</frameset>
-		</frameset>
+		</frameset> 
 	</frameset>
 </html>
