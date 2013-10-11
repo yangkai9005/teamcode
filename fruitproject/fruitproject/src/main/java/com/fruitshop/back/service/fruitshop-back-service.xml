@@ -51,6 +51,12 @@
 	<bean id="businessservice"
 		class="main.java.com.fruitshop.back.service.BusinessService">
 	</bean>
+	
+	<!-- 采购商品服务ben -->
+	<bean id="productservie"
+		class="main.java.com.fruitshop.back.service.ProductService">
+	</bean>
+	
 	<!-- 测试服务类 -->
 	<bean id="testservice1"
 		class="main.java.com.fruitshop.back.service.TestService1">
