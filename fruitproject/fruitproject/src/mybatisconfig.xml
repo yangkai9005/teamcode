@@ -24,6 +24,7 @@
 <mapper resource="main/java/com/fruitshop/back/sql/speciesattrsqlmap.xml"/>
 <mapper resource="main/java/com/fruitshop/back/sql/productunitqlmap.xml"/>
 <mapper resource="main/java/com/fruitshop/back/sql/businesssqlmap.xml"/>
+<mapper resource="main/java/com/fruitshop/back/sql/productqlmap.xml"/>
 <mapper resource="main/java/com/fruitshop/back/sql/testsqlmap.xml"/>
 </mappers>
 </configuration>
