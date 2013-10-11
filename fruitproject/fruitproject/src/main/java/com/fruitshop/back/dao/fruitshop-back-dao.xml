@@ -25,6 +25,12 @@
 	<bean id="productUnitDao" class="main.java.com.fruitshop.back.dao.ProductUnitDao">
 	</bean>
 	
+	<bean id="productDao" class="main.java.com.fruitshop.back.dao.ProductDao">
+	</bean>
+	
+	<bean id="productAttrDao" class="main.java.com.fruitshop.back.dao.ProductAttrDao">
+	</bean>
+	
 	<bean id="businessDao" class="main.java.com.fruitshop.back.dao.BusinessDao">
 	</bean>
 	<bean id="test1Dao" class="main.java.com.fruitshop.back.dao.Test1Dao"/>
