@@ -9,54 +9,96 @@
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/qtip.js"></script>
-		
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/list.js"></script>
 
 	</head>
 
 	<body>
-		<div class="ban">
-			<div class="ban_1">
-				<div style="float:left;padding-top: 7px;">
-				当前位置:商品种类管理
+		<div class="path">
+		<a href="${base}/admin/common/index.jhtml">采购管理</a> &raquo;<a href="">商品种类管理</a>
+	</div>
+		<form id="listForm" action="list.jhtml" method="get">
+		<div class="bar">
+			<a href="addspeciespane.do" class="iconButton">
+				<span class="addIcon">&nbsp;</span>添加
+			</a>
+			<div class="buttonWrap">
+				<a href="javascript:;" id="deleteButton" class="iconButton disabled">
+					<span class="deleteIcon">&nbsp;</span>删除
+				</a>
+				<a href="javascript:;" id="refreshButton" class="iconButton">
+					<span class="refreshIcon">&nbsp;</span>刷新
+				</a>
+				<div class="menuWrap">
+					<a href="javascript:;" id="pageSizeSelect" class="button">
+						每页显示<span class="arrow">&nbsp;</span>
+					</a>
+					<div class="popupMenu">
+						<ul id="pageSizeOption">
+							<li>
+								<a href="javascript:;" class="current" >10</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >20</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >30</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >40</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<div style="float:right;text-align:center">
-			<img src="images/add.png" onclick="javascript:location.href='addspeciespane.do'" style="cursor:pointer;padding-right:20px;" title="添加商品种类">
-			</div>
+			<div class="menuWrap">
+				<div class="search">
+					<span id="searchPropertySelect" class="arrow">&nbsp;</span>
+					<input type="text" id="searchValue" name="searchValue" value="" maxlength="200" />
+					<button type="submit">&nbsp;</button>
+				</div>
+				<div class="popupMenu">
+					<ul id="searchPropertyOption">
+						<li>
+							<a href="javascript:;" class="current" >名称</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		<div>
-		<div style="padding-top:3px;">
-			<table width="70%" id="mytab" border="1" class="t1">
-				<tr class="a1">
-				<thead>
-					<th width="20%" style="font-weight:bold">
-						商品种类名称
-					</th>
-					<th width="30%" style="font-weight:bold">
-						商品种类操作
-					</th>
-				</thead>
-				</tr>
-				<#if (speciesList?size==0)>
-					<tr class="a1">
-						<td colspan="2">
-							<font color="red">没有商品种类项</font>
-						</td>
-					</tr>
-				</#if>
-				
-				<#list speciesList as species>
-				<tr class="a1">
-					<td width="20%">
-					${species.productSpeciesName}
+		<table id="listTable" class="list">
+			<tr>
+				<th class="check">
+					<input type="checkbox" id="selectAll" />
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="name">商品种类名称</a>
+				</th>
+				<th>
+					保留
+				</th>
+				<th>
+					操作
+				</th>
+			</tr>
+			<#list speciesList as species>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" title="" value="" />
 					</td>
-					<td width="30%">
-					<a href="javascript:void(0)" rel="getspeciesattr.do?speciesId=${species.productSpeciesId}" title="详情" class="detail">详情</a>&nbsp;&nbsp;&nbsp<a href="#">修改</a>&nbsp;&nbsp;&nbsp<font class="del"><a href="#">删除</a></font>
+					<td>
+						${species.productSpeciesName}
+					</td>
+					<td>
+						保留
+					</td>
+					<td>
+						编辑
 					</td>
 				</tr>
-				</#list>
-				<tr class="a1" style="border:0px;background:#D4DCD6;"><td colspan="2" style="padding-top:10px;text-align: right;"><a href="#">上一页</a>&nbsp;&nbsp;<a href="#">下一页</a> &nbsp;&nbsp;<font color="#336600" style="font-weight:bolder">当前第1页&nbsp;</p></td></tr>
-			</table>
-		</div>
+			</#list>
+		</table>
+	</form>
 	</body>
 </html>

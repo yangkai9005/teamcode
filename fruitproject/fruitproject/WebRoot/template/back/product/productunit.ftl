@@ -2,11 +2,13 @@
 <html>
 	<head>
 
-		<title>新增产品</title>
+		<title>新增计量单位</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<link href="css/norm.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/norm.js"></script>
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/list.js"></script>
 		<script language="JavaScript" type="text/javascript" >
 			function updateUnit(unitId){
 			     var trhtml="";
@@ -38,56 +40,90 @@
 	</head>
 
 	<body>
-		<div class="ban">
-			<div class="ban_1">
-				
-				<div style="float:left;padding-top: 7px;">
-				当前位置:商品计量单位管理
+		<div class="path">
+		<a href="${base}/admin/common/index.jhtml">采购管理</a> &raquo;<a href="">计量单位管理</a>
+	</div>
+		<form id="listForm" action="list.jhtml" method="get">
+		<div class="bar">
+			<a href="addtunitpane.do" class="iconButton">
+				<span class="addIcon">&nbsp;</span>添加
+			</a>
+			<div class="buttonWrap">
+				<a href="javascript:;" id="deleteButton" class="iconButton disabled">
+					<span class="deleteIcon">&nbsp;</span>删除
+				</a>
+				<a href="javascript:;" id="refreshButton" class="iconButton">
+					<span class="refreshIcon">&nbsp;</span>刷新
+				</a>
+				<div class="menuWrap">
+					<a href="javascript:;" id="pageSizeSelect" class="button">
+						每页显示<span class="arrow">&nbsp;</span>
+					</a>
+					<div class="popupMenu">
+						<ul id="pageSizeOption">
+							<li>
+								<a href="javascript:;" class="current" >10</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >20</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >30</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >40</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<div style="float:right;text-align:center">
-			<img src="images/add.png" onclick="javascript:location.href='addtunitpane.do'" style="cursor:pointer;padding-right:20px;" title="添加计量单位">
-			</div>
+			<div class="menuWrap">
+				<div class="search">
+					<span id="searchPropertySelect" class="arrow">&nbsp;</span>
+					<input type="text" id="searchValue" name="searchValue" value="" maxlength="200" />
+					<button type="submit">&nbsp;</button>
+				</div>
+				<div class="popupMenu">
+					<ul id="searchPropertyOption">
+						<li>
+							<a href="javascript:;" class="current" >名称</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		<div>
-		<form id="form1" method="post" action="">
-			<table width="70%" id="mytab" border="1" class="t1">
-				<tr class="a1">
-				<thead>
-					<th width="20%" style="font-weight:bold">
-						商品单位名称
-					</th>
-					<th width="20%" style="font-weight:bold">
-						商品单位值
-					</th>
-					<th width="30%" style="font-weight:bold">
-						操作
-					</th>
-				</thead>
+		<table id="listTable" class="list">
+			<tr>
+				<th class="check">
+					<input type="checkbox" id="selectAll" />
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="name">商品单位名称</a>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="isSystem">商品单位值</a>
+				</th>
+				<th>
+					操作
+				</th>
+			</tr>
+			<#list units as unit>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" title="" value="" />
+					</td>
+					<td>
+						${unit.unitName}
+					</td>
+					<td>
+						${unit.unitValue}
+					</td>
+					<td>
+						编辑
+					</td>
 				</tr>
-				<#if (units?size==0)>
-					<tr class="a1">
-						<td colspan="3">
-							<font color="red">没有商品计量单位</font>
-						</td>
-					</tr>
-				</#if>
-				<#list units as unit>
-				<tr class="a1" id="tr${unit.unitId}">
-				<td width="20%">
-				${unit.unitName}
-					</td>
-					<td width="20%">
-					${unit.unitValue}
-					</td>
-					<td width="30%">
-					<a href="javascript:void(0)" onclick="updateUnit('${unit.unitId}')">修改</a>&nbsp;&nbsp;&nbsp<font class="del"><a href="javascript:void(0)" onclick="delPath('delunit.do?unitId=${unit.unitId}');">删除</a></font>
-					</td>
-					</tr>
-				</#list>
-				<tr class="a1" style="border:0px;background:#D4DCD6;"><td colspan="3" style="padding-top:10px;text-align: right;"><a href="#">上一页</a>&nbsp;&nbsp;<a href="#">下一页</a> &nbsp;&nbsp;<font color="#336600" style="font-weight:bolder">当前第1页&nbsp;</p></td></tr>
-			</table>
-			</form>
-		</div>
+			</#list>
+		</table>
+	</form>
 	</body>
 </html>
