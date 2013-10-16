@@ -38,8 +38,10 @@ public class MenuController {
 	@RequestMapping(value="/frt-bk-index.do")
 	public String lefttree(Model model,HttpSession session) throws CloneNotSupportedException{
 		String authId=session.getAttribute(Conts.USER_AUTH).toString();
+		String userName=session.getAttribute(Conts.USER_NAME).toString();
 		List<Menu> menus=menuService.getMenuByAuthId(authId);
 		model.addAttribute("menus",menus);
+		model.addAttribute("user",userName);
 		return FOLDER+"main";
 	}
 	@RequestMapping(value="/menu.do")
