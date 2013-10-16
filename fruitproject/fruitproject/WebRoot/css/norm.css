@@ -1,8 +1,7 @@
 body,table{
 		margin: 0px 0px;
 		padding: 0px 0px;
-		font-size:17px;
-		background-color: #D4DCD6;
+		font: 12px tahoma, Arial, Verdana, sans-serif;
 	}
 .txt {
     color:#333;
