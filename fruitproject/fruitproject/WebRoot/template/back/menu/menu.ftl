@@ -2,57 +2,101 @@
 <html>
 	<head>
 
-		<title>酷爱水果销售后台管理系统</title>
-		<meta http-equiv="pragma" content="no-cache">
+		<title>权限栏目一览表</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<link href="css/norm.css" rel="stylesheet" type="text/css" />
+		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/norm.js"></script>
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/list.js"></script>
 	</head>
 
 	<body>
-		<div class="ban">
-			<div class="ban_1">
-				
-				<div style="float:left;padding-top: 7px;">
-				当前位置:系统菜单列表
+	<div class="path">
+		<a href="${base}/admin/common/index.jhtml">权限管理</a> &raquo;<a href="">系统权限管理</a>
+	</div>
+		<form id="listForm" action="list.jhtml" method="get">
+		<div class="bar">
+			<a href="addmenupane.do" class="iconButton">
+				<span class="addIcon">&nbsp;</span>添加
+			</a>
+			<div class="buttonWrap">
+				<a href="javascript:;" id="deleteButton" class="iconButton disabled">
+					<span class="deleteIcon">&nbsp;</span>删除
+				</a>
+				<a href="javascript:;" id="refreshButton" class="iconButton">
+					<span class="refreshIcon">&nbsp;</span>刷新
+				</a>
+				<div class="menuWrap">
+					<a href="javascript:;" id="pageSizeSelect" class="button">
+						每页显示<span class="arrow">&nbsp;</span>
+					</a>
+					<div class="popupMenu">
+						<ul id="pageSizeOption">
+							<li>
+								<a href="javascript:;" class="current" >10</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >20</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >30</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >40</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<div style="float:right;text-align:center">
-			<img src="images/add.png" onclick="javascript:location.href='addmenupane.do'" style="cursor:pointer;padding-right:20px;" title="添加菜单">
-			</div>
+			<div class="menuWrap">
+				<div class="search">
+					<span id="searchPropertySelect" class="arrow">&nbsp;</span>
+					<input type="text" id="searchValue" name="searchValue" value="" maxlength="200" />
+					<button type="submit">&nbsp;</button>
+				</div>
+				<div class="popupMenu">
+					<ul id="searchPropertyOption">
+						<li>
+							<a href="javascript:;" class="current" >名称</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		<div>
-			<table width="90%" id="mytab" border="1" class="t1">
-				<thead>
-					<th width="20%">
-						菜单名称
-					</th>
-					<th width="60%">
-						子菜单列表
-					</th>
-					<th width="20%" colspan="2">
-						操作
-					</th>
-				</thead>
-				<#list menus as menu>
-				<tr class="a1">
+		<table id="listTable" class="list">
+			<tr>
+				<th class="check">
+					<input type="checkbox" id="selectAll" />
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="name">菜单名称</a>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="isSystem">子菜单列表</a>
+				</th>
+				<th>
+					<span>操作</span>
+				</th>
+			</tr>
+			<#list menus as menu>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" title="" value="" />
+					</td>
 					<td>
 						${menu.menuName}
 					</td>
 					<td>
-					<#list menu.menuChilds as menuChild>
-					${menuChild.menuChildName}&nbsp;
-					</#list>
+						<#list menu.menuChilds as menuChild>
+							${menuChild.menuChildName}&nbsp;
+						</#list>
 					</td>
-					<td colspan="2">
-					<img src="images/ico/add.gif" alt="添加子菜单" width="19px;" height="20px;" onclick="javascript:location.href='addmenuchildpane.do?menuId=${menu.menuId}'">&nbsp;&nbsp;
-						<img src="images/ico/update.gif" alt="修改子菜单" width="19px;" height="20px;" onclick="javascript:location.href='modemenu.do?menuId=${menu.menuId}'">&nbsp;&nbsp;
-						<img src="images/ico/del.gif" alt="删除菜单" width="19px;" height="20px;" onclick="delPath('delmenuval.do?menuId=${menu.menuId}');">
+					<td>
+						编辑
 					</td>
 				</tr>
-				</#list>
-				<tr class="a1" style="border:0px;background:#D4DCD6;"><td colspan="4" style="padding-top:10px;text-align: right;"><a href="#">上一页</a>&nbsp;&nbsp;<a href="#">下一页</a> &nbsp;&nbsp;<font color="#336600" style="font-weight:bolder">当前第1页&nbsp;</p></td></tr>
-			</table>
-		</div>
+			</#list>
+		</table>
+	</form>
 	</body>
 </html>

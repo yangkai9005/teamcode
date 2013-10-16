@@ -5,34 +5,43 @@
 		<title></title>
 		<link href="css/norm.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
-		<script language="JavaScript" type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.js"></script>
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/input.js"></script>
 	</head>
 	<body onload="displayAddBtn('menuName','addmenu');">
-		<div class="ban">
-			<div class="ban_1">
-			<div style="float:left;padding-top: 7px;">
-				当前位置:添加菜单
-			</div>
-			</div>
-		</div>
-		<div><input type='button' value="新增菜单" onclick="addMenuColum();" class="btn" style="float:right;width:100px;height:30px;background:url('images/btn/btn5.png');color:green;margin-right:60px;"></div>
-		<div style="padding-top:30px;">
-		<form id="menu" name="menuChild" action="addmenuval.do" method="post">
-		<input type="hidden" class="txt" name="authId" value="${authId}"/>
-			<table width="60%" id="mytab" border="1" class="t1">
-				<tr class="a1">
-					<td width="40%">
-					<font color="red" style="font-weight:bold">菜单名称</font>
-					</td> 
-					<td width="20%">
-					<font color="red" style="font-weight:bold">删除:</font>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div style="padding-right:60px;padding-top:20px;">
-		<input  type="button" id="addmenu" value="添加" class="btn" style="float:right;background:url('images/btn/btn4.png');width:50px;height:30px;" onclick="childMenuCharge('menuName','menuName','menu');"/>
-		</div>
-		</form>
+		<div class="path">
+		<a href="${base}/admin/common/index.jhtml">系统扩展栏目</a> &raquo;<a href="">菜单管理</a>
+	</div>
+	<form id="inputForm" action="addmenuval.do" method="post">
+		<table class="input">
+			<tr>
+				<th>
+					<span class="requiredField">*</span>菜单名称:
+				</th>
+				<td>
+					<input type="text" name="menuName" class="text" maxlength="200" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					菜单描述:
+				</th>
+				<td>
+					<input type="text"  class="text" maxlength="200" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					&nbsp;
+				</th>
+				<td>
+					<input type="submit" class="button" value="确定" />
+					<input type="button" id="backButton" class="button" value="返回" />
+				</td>
+			</tr>
+		</table>
+	</form>
 	</body>
 </html>
