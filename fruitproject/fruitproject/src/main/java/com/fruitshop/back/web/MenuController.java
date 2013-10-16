@@ -31,12 +31,16 @@ public class MenuController {
 	 * @return
 	 * @throws CloneNotSupportedException 
 	 */
-	@RequestMapping(value="/lefttree.do")
+	/**
+	 * 后台管理主界面
+	 * @return
+	 */
+	@RequestMapping(value="/frt-bk-index.do")
 	public String lefttree(Model model,HttpSession session) throws CloneNotSupportedException{
 		String authId=session.getAttribute(Conts.USER_AUTH).toString();
 		List<Menu> menus=menuService.getMenuByAuthId(authId);
 		model.addAttribute("menus",menus);
-		return FOLDER+"lefttree";
+		return FOLDER+"main";
 	}
 	@RequestMapping(value="/menu.do")
 	public String menuPane(Model model) throws CloneNotSupportedException{
