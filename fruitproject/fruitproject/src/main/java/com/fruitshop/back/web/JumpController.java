@@ -23,14 +23,6 @@ public class JumpController {
 		return FOLDER+"logon";
 	}
 	/**
-	 * 后台管理主界面
-	 * @return
-	 */
-	@RequestMapping(value="/frt-bk-index.do")
-	public String home(){
-		return FOLDER+"index";
-	}
-	/**
 	 * 头部banner
 	 * @return
 	 */
