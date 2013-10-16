@@ -45,6 +45,7 @@ public class UserService {
 		if(Util.encryptByMD5(userpwd).equals(user.getSystemUserPwd())){
 			session.setAttribute(Conts.USER_CODE_FLAG, Conts.USER_CODE);//将登录成功的用户的标识存放到session中
 			session.setAttribute(Conts.USER_AUTH, user.getSystemAuthId());//把登录进来用户的权限存放在session
+			session.setAttribute(Conts.USER_NAME, user.getSystemUserName());
 			return 0;
 		}
 		else{
