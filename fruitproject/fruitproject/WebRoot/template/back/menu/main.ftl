@@ -54,7 +54,7 @@ $().ready(function() {
 		<tr>
 			<th class="logo">
 				<a href="main.jhtml">
-					<img src="images/header_logo.gif" alt="SHOP++" />
+					<!--<img src="images/header_logo.gif" alt="SHOP++" />-->
 				</a>
 			</th>
 			<th>
@@ -73,7 +73,7 @@ $().ready(function() {
 				<div class="link">
 				</div>
 				<div class="link">
-					<strong style="color:red">${frt-shop-user}</strong>
+					<strong style="color:red">${user}</strong>
 					您好!
 					<a href="../profile/edit.jhtml" target="iframe">[账号设置]</a>
 					<a href="../logout.jsp" target="_top">[注销]</a>
