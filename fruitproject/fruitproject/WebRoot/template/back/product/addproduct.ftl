@@ -10,6 +10,34 @@
 		<script type="text/javascript" src="js/input.js"></script>
 		<script type="text/javascript" src="js/jquery.tools.js"></script>
 		<script type="text/javascript" src="js/kindeditor.js"></script>
+<script language="JavaScript" type="text/javascript" >
+			var beforeId;
+			function viewAttr(id){
+				$("#species"+beforeId).css("display","none");
+				$("#species"+id).css("display","block");
+				beforeId=id;
+				$("#speciesId").val(id);
+			}
+			
+			function price(value){
+					$("#price").html("元/"+value);
+			}
+			
+			function addProduct(){
+				var id=$("#speciesId").val();
+				var attrValues="";
+				var attrNames="";
+				$.each($("input[name=value"+id+"]"),function(i,data){
+					attrValues+=data.value+",";
+				});
+				$.each($("input[name=name"+id+"]"),function(i,data){
+					attrNames+=data.value+",";
+				});
+				$("#producrAttrs").val(attrValues);
+				$("#producrNames").val(attrNames);
+				$("#product").submit();
+			}
+		</script>
 	</head>
 	<body onload="displayAddBtn('menuName','addmenu');">
 		<div class="path">
@@ -22,7 +50,9 @@
 					<span class="requiredField">*</span>商品名称:
 				</th>
 				<td>
-					<input type="text" name="businessName" id="businessName" class="text" maxlength="200" />
+					<input type="text" name="businessName" id="businessName" class="text" 
+
+maxlength="200" />
 				</td>
 			</tr>
 			<tr>
@@ -38,12 +68,34 @@
 					</select>
 				</td>
 			</tr>
+			
+			<tr class="a1">
+					<th>
+					商品属性:
+				</th>
+					<td width="65%" style="color:#336600;text-align: left" colspan="5" >
+					<#list specieses as species>
+						<div id="species${species.productSpeciesValue}" style="display: none;"  >
+						<#list species.attrList as attr>
+							<div style="float:left">
+							<input type="text" value="" class="text"   name="value${species.productSpeciesValue}" id="speicesattr${attr.speciesAttrId}"  />
+							</div>
+							<div >${attr.speciesAttrName}</div>
+						</#list>
+						</#list>
+						</div>
+				<td>
+			</tr>
 			<tr>
 				<th>
 					商品进价:
 				</th>
 				<td>
-					<input type="text" name="businessName" id="businessName" class="text" maxlength="200" />
+					<input type="text" name="businessName" id="businessName" class="text" maxlength="200" /><font id="price"><#list units as unit>
+					<#if unit_index==0>
+					元/${unit.unitValue}
+					</#if>
+					</#list></font>
 				</td>
 			</tr>
 			<tr>
@@ -51,7 +103,9 @@
 					商品数量:
 				</th>
 				<td>
-					<input type="text" name="businessAddr" id="businessAddr" class="text" maxlength="200" />
+					<input type="text" name="businessAddr" id="businessAddr" class="text" 
+
+maxlength="200" />
 					<select>
 					<#list units as unit>
 					<option value="${unit.unitValue}">${unit.unitName}</option>
@@ -64,7 +118,9 @@
 					商品等级:
 				</th>
 				<td>
-					<select><option value="">请选择商品等级</option><option>一级</option><option>二级</option><option>三级</option></select>
+					<select><option value="">请选择商品等级</option><option>一级</option><option>二级
+
+</option><option>三级</option></select>
 				</td>
 			</tr>
 			<tr>
@@ -72,7 +128,9 @@
 					采购人员:
 				</th>
 				<td>
-					<input type="text" name="businessName" id="businessName" class="text" maxlength="200" />
+					<input type="text" name="businessName" id="businessName" class="text" 
+
+maxlength="200" />
 				</td>
 			</tr>
 			<tr>
@@ -80,7 +138,9 @@
 					商品描述:
 				</th>
 				<td>
-					<textarea id="editor" name="businessOpeartingRange" id="businessOpeartingRange" class="editor"></textarea>
+					<textarea id="editor" name="businessOpeartingRange" id="businessOpeartingRange" 
+
+class="editor"></textarea>
 				</td>
 			</tr>
 			<tr>
