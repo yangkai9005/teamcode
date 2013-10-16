@@ -1,6 +1,7 @@
 package main.java.com.fruitshop.back.po;
 
 import java.sql.Date;
+import java.util.List;
 /**
  * 产品类
  * @author yangkai
@@ -17,6 +18,7 @@ public class Product {
 	private float productPurchase;
 	private Date productDate;
 	private String productDesc;
+	private String[] producrAttrs;
 	public String getProductId() {
 		return productId;
 	}
@@ -70,6 +72,12 @@ public class Product {
 	}
 	public void setProductDesc(String productDesc) {
 		this.productDesc = productDesc;
+	}
+	public String[] getProducrAttrs() {
+		return producrAttrs;
+	}
+	public void setProducrAttrs(String[] producrAttrs) {
+		this.producrAttrs = producrAttrs;
 	}
 	
 }
