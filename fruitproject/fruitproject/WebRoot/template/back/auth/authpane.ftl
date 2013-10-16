@@ -4,61 +4,112 @@
 
 		<title>权限栏目一览表</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<link href="css/norm.css" rel="stylesheet" type="text/css" />
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/norm.js"></script>
+		<script type="text/javascript" src="js/list.js"></script>
 	</head>
 
 	<body>
-		<div class="ban">
-		<div class="ban_1">
-			<div style="float:left;padding-top: 7px;">
-				当前位置:系统权限列表
+	<div class="path">
+		<a href="${base}/admin/common/index.jhtml">权限管理</a> &raquo;<a href="">系统权限管理</a>
+	</div>
+		<form id="listForm" action="list.jhtml" method="get">
+		<div class="bar">
+			<a href="addauthpane.do" class="iconButton">
+				<span class="addIcon">&nbsp;</span>添加
+			</a>
+			<div class="buttonWrap">
+				<a href="javascript:;" id="deleteButton" class="iconButton disabled">
+					<span class="deleteIcon">&nbsp;</span>删除
+				</a>
+				<a href="javascript:;" id="refreshButton" class="iconButton">
+					<span class="refreshIcon">&nbsp;</span>刷新
+				</a>
+				<div class="menuWrap">
+					<a href="javascript:;" id="pageSizeSelect" class="button">
+						每页显示<span class="arrow">&nbsp;</span>
+					</a>
+					<div class="popupMenu">
+						<ul id="pageSizeOption">
+							<li>
+								<a href="javascript:;" class="current" >10</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >20</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >30</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="current" >40</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<div style="float:right;text-align:center">
-			<img src="images/add.png" onclick="javascript:location.href='addauthpane.do'" style="cursor:pointer;padding-right:20px;" title="添加权限">
+			<div class="menuWrap">
+				<div class="search">
+					<span id="searchPropertySelect" class="arrow">&nbsp;</span>
+					<input type="text" id="searchValue" name="searchValue" value="" maxlength="200" />
+					<button type="submit">&nbsp;</button>
+				</div>
+				<div class="popupMenu">
+					<ul id="searchPropertyOption">
+						<li>
+							<a href="javascript:;" class="current" >名称</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		</div>
-		<div>
-			<table width="90%" id="mytab" border="1" class="t1">
-				<thead>
-					<th width="20%">
-						名称
-					</th>
-					<th width="10%">
-						等级
-					</th>
-					<th width="50%" >
-						菜单栏目
-					</th>
-					<th width="20%" >
-						操作
-					</th>
-				</thead>
-				<#list auths as auth>
-				<tr class="a1">
+		<table id="listTable" class="list">
+			<tr>
+				<th class="check">
+					<input type="checkbox" id="selectAll" />
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="name">角色名称</a>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="isSystem">等级</a>
+				</th>
+				<th>
+					<span>菜单栏目</span>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="createDate">创建时间</a>
+				</th>
+				<th>
+					<span>操作</span>
+				</th>
+			</tr>
+			<#list auths as auth>
+				<tr>
 					<td>
-						${auth.systemAuthName} 
+						<input type="checkbox" name="ids" <#if auth.systemAuthLevel==1> title="超级管理员不能被删除" 
+						disabled="disabled" <#else> value="${auth.system_auth_id}" </#if> />
 					</td>
 					<td>
-					${auth.systemAuthLevel}
+						${auth.systemAuthName}
 					</td>
 					<td>
-					<#list auth.menus as menu>
+						${auth.systemAuthLevel}
+					</td>
+					<td>
+						<#list auth.menus as menu>
 					${menu.menuName }&nbsp;
 					</#list>
 					</td>
 					<td>
-					<!--<input type='button' value="修改" onclick="javascript:location.href='updateauthpane.do?authId=${auth.systemAuthId}'" class="btn" style="width:50px;height:30px;background:url('images/btn/btn5.png');color:green;">
-					<input type='button' value="删除" onclick="delPath('delauthval.do?authId=${auth.systemAuthId}')" class="btn" style="width:50px;height:30px;background:url('images/btn/btn5.png');color:red;">
-					-->
-					<a href="updateauthpane.do?authId=${auth.systemAuthId}'">修改</a>&nbsp;&nbsp;&nbsp<font class="del"><a href="javascript:void(0)" onclick="delPath('delauthval.do?authId=${auth.systemAuthId}')" >删除</a></font>
+						2013-10-13 12:12:12
+					</td>
+					<td>
+						编辑
 					</td>
 				</tr>
-				</#list>
-				<tr class="a1" style="border:0px;background:#D4DCD6;"><td colspan="4" style="padding-top:10px;text-align: right;"><a href="#">上一页</a>&nbsp;&nbsp;<a href="#">下一页</a> &nbsp;&nbsp;<font color="#336600" style="font-weight:bolder">当前第1页&nbsp;</p></td></tr>
-			</table>
-		</div>
+			</#list>
+		</table>
+	</form>
 	</body>
 </html>
