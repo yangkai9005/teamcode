@@ -30,12 +30,13 @@ public class UserFilter implements Filter {
 		String uri=request.getRequestURI();
 		Object userCode=session.getAttribute(Conts.USER_CODE_FLAG);
 		Object userAuth=session.getAttribute(Conts.USER_AUTH);
+		Object userName=session.getAttribute(Conts.USER_NAME);
 		if(uri.indexOf("logon.do")>0){//如果是登录界面就不拦截
 			setEncode(request, response);
 			arg2.doFilter(request, response);
 			return;
 		}
-		if(userCode==null||userAuth==null){
+		if(userCode==null||userAuth==null||userName==null){
 			response.sendRedirect(request.getContextPath()+"/frt-bk-logon.do");
 			return;
 		}
