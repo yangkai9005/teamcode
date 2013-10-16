@@ -9,6 +9,7 @@ import main.java.com.fruitshop.util.Util;
  */
 public class Conts {
 	public static final String USER_CODE_FLAG="usercodeflag";
+	public static final String USER_NAME="frt-shop-user";
 	public static final String USER_CODE=Util.encryptByMD5("shopuser");
 	public static final String STRING="java.lang.String";//数据类型
 	public static final String INT="int";//整型
