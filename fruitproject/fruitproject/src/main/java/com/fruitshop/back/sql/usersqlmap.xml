@@ -36,6 +36,15 @@
 	<delete id="delUser" parameterType="String" flushCache="true">
 		DELETE FROM system_user_t WHERE system_user_id=#{userId}
 	</delete>
+	
+	<!-- 批量删除用户 -->
+	<delete id="delUserBatch" flushCache="true"> 
+		DELETE FROM system_user_t WHERE system_user_id IN
+		<foreach collection="list" index="index" item="SystemAuthId" open="("
+			separator="," close=")">
+			#{SystemAuthId}
+		</foreach> 
+	</delete>
 
 	<select id="getUserByUserName" parameterType="String"
 		resultMap="user" flushCache="false">

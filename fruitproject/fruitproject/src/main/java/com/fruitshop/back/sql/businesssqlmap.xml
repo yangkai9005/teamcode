@@ -46,4 +46,13 @@
 	<delete id="delbusiness" flushCache="true" parameterType="String">
 		DELETE FROM business_t WHERE business_id=#{businessId}
 	</delete>
+	
+	<!-- 批量删除商家 -->
+	<delete id="delBusinessBatch" flushCache="true"> 
+		DELETE FROM business_t WHERE business_id IN
+		<foreach collection="list" index="index" item="businessId" open="("
+			separator="," close=")">
+			#{businessId}
+		</foreach> 
+	</delete>
 </mapper>
