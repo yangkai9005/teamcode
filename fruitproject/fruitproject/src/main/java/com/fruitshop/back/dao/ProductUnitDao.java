@@ -4,6 +4,7 @@ import java.util.List;
 
 import main.java.com.fruitshop.back.po.ProductUnit;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +20,10 @@ public class ProductUnitDao implements BaseDao<ProductUnit> {
 	@Override
 	public int delete(String statement, Object unitId) {
 		return sqlSessionTemplate.delete(statement, unitId);
+	}
+	
+	public int delBatch(String statement,@Param("list")List<String> list){
+		return sqlSessionTemplate.delete("delUnitBatch", list);
 	}
 
 	@Override

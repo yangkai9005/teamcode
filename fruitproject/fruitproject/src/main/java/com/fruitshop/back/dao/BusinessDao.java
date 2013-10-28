@@ -2,6 +2,7 @@ package main.java.com.fruitshop.back.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,6 +19,10 @@ public class BusinessDao implements BaseDao<Business> {
 	@Override
 	public int delete(String statement, Object params) {
 		return sqlSessionTemplate.delete(statement, params);
+	}
+	
+	public int delBatch(String statement,@Param("list")List<String> list){
+		return sqlSessionTemplate.delete("delBusinessBatch", list);
 	}
 
 	@Override

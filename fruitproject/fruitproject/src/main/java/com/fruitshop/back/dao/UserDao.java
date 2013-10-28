@@ -1,12 +1,16 @@
 package main.java.com.fruitshop.back.dao;
 
 import java.util.List;
+
+import main.java.com.fruitshop.back.po.Auth;
 import main.java.com.fruitshop.back.po.User;
+
+import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserDao implements BaseDao<User>{
+public class UserDao implements BatchBaseDao<User>{
 	private static final Logger logger=Logger.getLogger(UserDao.class);
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -63,4 +67,27 @@ public class UserDao implements BaseDao<User>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void addBatch(String statement, List<User> objs) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delBatch(String statement, List<User> params) {
+		sqlSessionTemplate.delete("delUserBatch", params);
+	}
+	
+	public int delBath(String statement,@Param("list")List<String> list){
+		return sqlSessionTemplate.delete("delUserBatch", list);
+	}
+
+	@Override
+	public void updateBatch(String statement, List<User> objs) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }
