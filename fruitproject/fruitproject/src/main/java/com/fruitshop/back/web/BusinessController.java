@@ -1,5 +1,8 @@
 package main.java.com.fruitshop.back.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import main.java.com.fruitshop.back.po.Business;
 import main.java.com.fruitshop.back.service.BusinessService;
 
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BusinessController {
@@ -61,6 +65,18 @@ public class BusinessController {
 	@RequestMapping(value="/delbusiness.do")
 	public String delBusinessVal(Model model,String businessId){
 		businessService.delBusiness(businessId);
+		model.addAttribute("businesses", businessService.getAllBusiness());
+		return FOLD+"businesspane";
+	}
+	
+	@RequestMapping(value="/delbusinessunit.do")
+	public String delBusinessUnit(Model model,@RequestParam String ids){
+		String idArray[]=ids.split(",");
+		List<String> list=new ArrayList<String>();
+		for (String id:idArray) {
+			list.add(id);
+		}
+		businessService.delBusinessBatch(list);
 		model.addAttribute("businesses", businessService.getAllBusiness());
 		return FOLD+"businesspane";
 	}

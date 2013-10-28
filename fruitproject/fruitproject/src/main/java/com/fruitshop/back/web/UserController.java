@@ -1,6 +1,7 @@
 package main.java.com.fruitshop.back.web;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UserController {
@@ -63,6 +65,19 @@ public class UserController {
 		model.addAttribute("users", userService.findAllUser());
 		return FOLDER+"userpan";
 	}
+	
+	@RequestMapping(value="/delbathuserval.do")
+	public String delBathUserval(Model model,@RequestParam String ids){
+		String idArray[]=ids.split(",");
+		List<String> list=new ArrayList<String>();
+		for (String id:idArray) {
+			list.add(id);
+		}
+		userService.delBathUser(list);
+		model.addAttribute("users", userService.findAllUser());
+		return FOLDER+"userpan";
+	}
+	
 	/**
 	 * 根据用户名判断用户是否存在
 	 * 0 存在 1 不存在
@@ -89,4 +104,6 @@ public class UserController {
 	public int updateUser(User user){
 		return 0;
 	}
+	
+	
 }

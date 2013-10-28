@@ -1,5 +1,8 @@
 package main.java.com.fruitshop.back.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import main.java.com.fruitshop.back.po.ProductUnit;
 import main.java.com.fruitshop.back.service.ProductUnitService;
 
@@ -62,6 +65,18 @@ public class ProductUnitController {
 	@RequestMapping(value="/delunit.do")
 	public String delProductUnit(Model model,String unitId){
 		unitService.delProductUnit(unitId);
+		model.addAttribute("units", unitService.getAllProductUnit());
+		return FOLD+"productunit";
+	}
+	
+	@RequestMapping(value="/delbathunit.do")
+	public String delBathUnit(Model model,@RequestParam String ids){
+		String idArray[]=ids.split(",");
+		List<String> list=new ArrayList<String>();
+		for (String id:idArray) {
+			list.add(id);
+		}
+		unitService.delUnitBatch(list);
 		model.addAttribute("units", unitService.getAllProductUnit());
 		return FOLD+"productunit";
 	}
