@@ -7,6 +7,8 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<link href="css/norm.css" rel="stylesheet" type="text/css" />
 		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.6.2.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript" src="js/list.js"></script>
 	</head>
 
@@ -20,7 +22,9 @@
 				<span class="addIcon">&nbsp;</span>添加
 			</a>
 			<div class="buttonWrap">
-				<a href="javascript:;" id="deleteButton" class="iconButton disabled">
+				<a href="javascript:;" id="deleteButton" class="iconButton disabled"
+					onclick="delFun('delbathuserval.do');"
+					>
 					<span class="deleteIcon">&nbsp;</span>删除
 				</a>
 				<a href="javascript:;" id="refreshButton" class="iconButton">
@@ -81,7 +85,7 @@
 			<#list users as user>
 				<tr>
 					<td>
-						<input type="checkbox" name="ids" title="" value="" />
+						<input type="checkbox" name="ids" title="" value="${user.systemUserId}" />
 					</td>
 					<td>
 						${user.systemUserName}
