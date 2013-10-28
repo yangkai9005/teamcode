@@ -23,6 +23,10 @@ public class ProductUnitService {
 		return unitDao.delete("delproductUnit", unitId);
 	}
 	
+	public int delUnitBatch(List<String> list){
+		return unitDao.delBatch("delUnitBatch", list);
+	}
+	
 	public int updateProductUnit(ProductUnit unit){
 		return unitDao.update("updateproductunit", unit);
 	}

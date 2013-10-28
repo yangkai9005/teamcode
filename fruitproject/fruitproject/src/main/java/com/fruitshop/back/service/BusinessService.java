@@ -22,6 +22,12 @@ public class BusinessService {
 	public int delBusiness(String businessId){
 		return businessDao.delete("delbusiness", businessId);
 	}
+	
+	//批量删除商家信息
+	public int delBusinessBatch(List<String> list){
+		return businessDao.delBatch("delBusinessBatch", list);
+	}
+	
 	//通过ID查找商家信息
 	public Business getBusinessById(String businessId){
 		return businessDao.selectOne("getbusinessbyid", businessId);

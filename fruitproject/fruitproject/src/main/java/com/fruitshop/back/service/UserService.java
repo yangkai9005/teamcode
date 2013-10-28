@@ -77,4 +77,11 @@ public class UserService {
 		return userDao.add("addUser", user);
 		
 	}
+	
+	/**
+	 * 批量删除用户
+	 */
+	public void delBathUser(List<String> list){
+		userDao.delBath("delUserBatch", list);
+	}
 }
