@@ -31,7 +31,7 @@ $().ready( function() {
 	var $pageNumber = $("#pageNumber");
 	
 	// 删除
-	$deleteButton.click( function() {
+	/*$deleteButton.click( function() {
 		var $this = $(this);
 		if ($this.hasClass("disabled")) {
 			return false;
@@ -67,7 +67,7 @@ $().ready( function() {
 				});
 			}
 		});
-	});
+	});*/
 	
 	// 刷新
 	$refreshButton.click( function() {
@@ -227,3 +227,39 @@ $().ready( function() {
 	}
 
 });
+
+/*function delFun(url){
+	var $checkedIds = $("#listTable input[name='ids']:enabled:checked");
+	var ids="";
+	$checkedIds.each(function(i,element){
+		ids+=$(element).val()+",";
+	});
+	ids=ids.substring(0,ids.length-1);
+	window.location.href=url+"?ids="+ids;
+}*/
+
+function delFun(url){
+	var $this = $(this);
+	if ($this.hasClass("disabled")) {
+		return false;
+	}
+	var $checkedIds = $("#listTable input[name='ids']:enabled:checked");
+	$.dialog({
+		type: "warn",
+		content: message("admin.dialog.deleteConfirm"),
+		ok: message("admin.dialog.ok"),
+		cancel: message("admin.dialog.cancel"),
+		onOk: function() {
+			/*方法一*/
+			/*var ids="";
+			$checkedIds.each(function(i,element){
+				ids+=$(element).val()+",";
+			});
+			ids=ids.substring(0,ids.length-1);*/
+			/*方法二*/
+			var ids=$checkedIds.map(function(){return $(this).val();}).get().join(",");
+			window.location.href=url+"?ids="+ids;
+			
+		}
+	});
+}
