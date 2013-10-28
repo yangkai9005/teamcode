@@ -5,14 +5,14 @@
 		<title>权限栏目一览表</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<link href="css/common.css" rel="stylesheet" type="text/css" />
-		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
+		<script type="text/javascript" src="js/jquery-1.6.2.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/norm.js"></script>
 		<script type="text/javascript" src="js/list.js"></script>
 	</head>
 
 	<body>
 	<div class="path">
-		<a href="${base}/admin/common/index.jhtml">权限管理</a> &raquo;<a href="">系统权限管理</a>
+		<a href="">权限管理</a> &raquo;<a href="">系统权限管理</a>
 	</div>
 		<form id="listForm" action="list.jhtml" method="get">
 		<div class="bar">
@@ -105,7 +105,7 @@
 						2013-10-13 12:12:12
 					</td>
 					<td>
-						编辑
+						<a href="updateauthpane.do?authId=${auth.systemAuthId}">编辑</a>
 					</td>
 				</tr>
 			</#list>
