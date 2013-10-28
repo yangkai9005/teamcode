@@ -92,7 +92,8 @@
 						</#list>
 					</td>
 					<td>
-						编辑
+						<a href="modemenu.do?menuId=${menu.menuId}">编辑</a>&nbsp;&nbsp;
+						<a href="addmenuchildpane.do?menuId=${menu.menuId}">添加子菜单</a>
 					</td>
 				</tr>
 			</#list>

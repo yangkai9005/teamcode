@@ -32,7 +32,6 @@
 					<input type="text" class="txt" name="menuChildAddr" value="${menuChilde.menuChildAddr}"/>
 					</td>
 					<td width="20%">
-					<font color="red">删除:</font>
 					<img src="images/ico/del.gif" alt="删除菜单" width="19px;" height="20px;" onclick="delPath('delmenuchildval.do?menuChildId=${menuChilde.menuChildId}')">
 					<input type="hidden" class="txt" name="menuId" value="${menuChilde.menuId}"/>
 					</td>
