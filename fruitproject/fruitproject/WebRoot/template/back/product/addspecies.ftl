@@ -6,17 +6,28 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<link href="css/norm.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.js"></script>
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/input.js"></script>
 		<script language="JavaScript" type="text/javascript">
 		//添加属性
 		function addSpeciesAttr() {
-	      $("tr:last").after("<tr class=\"a1\"><td width=\"33%\" style=\"font-weight:bold;color:#336600;font-size:16px;\"><input type=\"text\" class=\"txt\" name=\"attrname\" /></td><td width=\"47%\" style=\"font-weight:bold;color:#336600;font-size:16px;\"><input type='text'   class=\"txt\" name=\"attrval\" ></td><td width=\"10%\" style=\"font-weight:bold;color:#336600;font-size:16px;\"><font class=\"del\"><a href=\"javascript:void(0)\" onclick=\"delSpeciesAttr(this)\">删除</a></font></td></tr>");
+	     //$("tr[name='addSpecie']:last").after("<tr class=\"a1\"><td width=\"33%\" style=\"font-weight:bold;color:#336600;font-size:16px;\"><input type=\"text\" class=\"txt\" name=\"attrname\" /></td><td width=\"47%\" style=\"font-weight:bold;color:#336600;font-size:16px;\"><input type='text'   class=\"txt\" name=\"attrval\" ></td><td width=\"10%\" style=\"font-weight:bold;color:#336600;font-size:16px;\"><font class=\"del\"><a href=\"javascript:void(0)\" onclick=\"delSpeciesAttr(this)\">删除</a></font></td></tr>");
+		 var nameObj=$("<td style='text-align:center;'><input type='text' name='attrname' /></td>");
+		 var valueObj=$("<td style='text-align:center;'><input type='text' name='attrval' /></td>");
+		 var delObj=$("<td style='text-align:center;'><a href='javascript:void(0);' onclick='delSpeciesAttr(this);'>删除</a></td>");
+		 var trObj=$("<tr name='addSpecie'>").append(nameObj).append(valueObj).append(delObj);
+		 $("table[name='addSpecie']").append(trObj);
        }
+       
        function delSpeciesAttr(obj) {
-		$(obj).parent().parent().parent().remove();
+		$(obj).parent().parent().remove();
 		}
 		
 		function addSpecie(){
 			var species=getSpeciesInstant();
+			console.log(species);
 			if(species.speciesname==""){
 				alert("种类名称不能为空");
 				return ;
@@ -34,7 +45,13 @@
 				alert("商品种类属性值不能为空");
 				return ;
 			}
-			$("#form1").submit();	
+			
+			var attrname=$("input[name='attrname']").map(function(){return $(this).val()}).get().join(",");
+			var attrval=$("input[name='attrval']").map(function(){return $(this).val()}).get().join(",");
+			var speciesName=$("input[name='speciesName']").serialize();
+			alert(attrname+"----"+attrval+"----"+speciesName);
+			window.location.href="addspeciesval.do?"+speciesName+"&attrname="+attrname+"&attrval="+attrval;
+			//$("#form1").submit();	
 		}
 		function getSpeciesInstant(){
 		var names=$("input[name='attrname']");
@@ -75,31 +92,44 @@
 			</div>
 		</div>
 		<div>
-		<form name="form1" id="form1" action="addspeciesval.do" method="post">
-			<table width="50%" id="mytab" border="1" class="t1">
-				<tr class="a1">
-					<td width="100%" style="color:#336600;font-size:21px;">
-					商家名称:<input type='text' value=""   name="" id="">
-					</td>
-					<td width="100%" style="color:#336600;font-size:21px;">
-					商家地址:<input type='text' value=""  class="txt" name="speciesName" id="speciesname">
-					</td>
-				</tr>
-				
-				<tr class="a1">
-					<td width="100%" style="color:#336600;font-size:21px;">
-					联系人:<input type='text' value=""   name="" id="">
-					</td>
-					<td width="100%" style="color:#336600;font-size:21px;">
-					联系电话:<input type='text' value=""  class="txt" name="speciesName" id="speciesname">
-					</td>
-				</tr>
-				<tr class="a1">
-					<td width="100%" style="color:#336600;font-size:21px;" colspan="2">
-					经营范围:<input type='text' value=""   name="" id="">
-					</td>
-				</tr>
-			</table>
-		</form>
+		<form id="inputForm" action="addspeciesval.do" method="post">
+		<table class="input">
+			<tr>
+				<th>
+					<span class="requiredField">*</span>类别名称:
+				</th>
+				<td>
+					<input type="text" name="speciesName" class="text" maxlength="200" />
+				</td>
+			</tr>
+			
+			<tr style="min-height:400px;">
+				<th>
+					<span class="requiredField">*</span>类别属性:
+				</th>
+				<td>
+					<table name="addSpecie">
+						<tr onclick="addSpeciesAttr();" title="添加属性">
+							<th style="text-align:center;">属性名称</th>
+							<th style="text-align:center;">属性值</th>
+							<th style="text-align:center;">操作</th>
+						</tr>
+						<tr>
+							<td style="text-align:center;"><input type="text" name="attrname" /></td>
+							<td style="text-align:center;"><input type="text" name="attrval" /></td>
+							<td style="text-align:center;"><a href="javascript:void(0);" onclick="delSpeciesAttr(this);">删除</a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<input style="margin-left:10%;" type="button" class="button" value="确定" onclick="addSpecie();" />
+					<input type="button" id="backButton" class="button" value="返回" />
+				</td>
+			</tr>
+		</table>
+	</form>
 	</body>
 </html>

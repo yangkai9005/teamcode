@@ -7,9 +7,11 @@
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
 		<script type="text/javascript" src="js/jquery.validate.js"></script>
 		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript" src="js/input.js"></script>
 		<script type="text/javascript" src="js/jquery.tools.js"></script>
 		<script type="text/javascript" src="js/kindeditor.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
 	</head>
 	<body onload="displayAddBtn('menuName','addmenu');">
 		<div class="path">

@@ -8,15 +8,17 @@
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/norm.js"></script>
 		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript" src="js/list.js"></script>
 		<script language="JavaScript" type="text/javascript" >
 			function updateUnit(unitId){
 			     var trhtml="";
 				 var tds=$("#tr"+unitId+" td");
-				 var td3="<a href=\"javascript:void(0)\" onclick=\"saveUnit('"+unitId+"')\">保存</a>&nbsp;&nbsp;&nbsp<font class=\"del\"><a href=\"javascript:void(0)\" onclick=\"delPath('delunit.do?unitId="+unitId+"');\">删除</a></font>";
-				 trhtml+="<td width=\"20%\"><input type='text' value='"+$.trim($(tds[0]).text())+"' id='unitname"+unitId+"'\></td>";
-				 trhtml+="<td width=\"20%\"><input type='text' value='"+$.trim($(tds[1]).text())+"' id='unitval"+unitId+"'\></td>";
-				 trhtml+="<td width=\"30%\">"+td3+"<input type='hidden' value='"+unitId+"' id='unitid"+unitId+"'\></td>";
+				 var td3="<a href=\"javascript:void(0)\" onclick=\"saveUnit('"+unitId+"')\">保存</a>";
+				 trhtml+="<td><input type='checkbox' name='ids'  value='"+unitId+"'\></td>";
+				 trhtml+="<td><input type='text' value='"+$.trim($(tds[1]).text())+"' id='unitname"+unitId+"'\></td>";
+				 trhtml+="<td><input type='text' value='"+$.trim($(tds[2]).text())+"' id='unitval"+unitId+"'\></td>";
+				 trhtml+="<td>"+td3+"<input type='hidden' value='"+unitId+"' id='unitid"+unitId+"'\></td>";
 				 $("#tr"+unitId).html(trhtml);
 			}
 			
@@ -26,7 +28,7 @@
 			     var unitValue=$("#unitval"+unitId).val();
 			     $.post("updateunit.do",{unitId:unitId,unitName:unitName,unitValue:unitValue},function(data){
 			     	if(data==1){
-			     		var td3="<a href=\"javascript:void(0)\" onclick=\"updateUnit('"+unitId+"')\">修改</a>&nbsp;&nbsp;&nbsp<font class=\"del\"><a href=\"javascript:void(0)\" onclick=\"delPath('delunit.do?unitId="+unitId+"');\">删除</a></font>";
+			     		var td3="<a href=\"javascript:void(0)\" onclick=\"updateUnit('"+unitId+"')\">修改</a>";
 			     		$("#unitname"+unitId).parent().html(unitName);
 			     		$("#unitval"+unitId).parent().html(unitValue);
 			     		$("#unitid"+unitId).parent().html(td3);
@@ -49,7 +51,7 @@
 				<span class="addIcon">&nbsp;</span>添加
 			</a>
 			<div class="buttonWrap">
-				<a href="javascript:;" id="deleteButton" class="iconButton disabled">
+				<a href="javascript:;" id="deleteButton" class="iconButton disabled" onclick="delFun('delbathunit.do');">
 					<span class="deleteIcon">&nbsp;</span>删除
 				</a>
 				<a href="javascript:;" id="refreshButton" class="iconButton">
@@ -108,9 +110,9 @@
 				</th>
 			</tr>
 			<#list units as unit>
-				<tr>
+				<tr id="tr${unit.unitId}">
 					<td>
-						<input type="checkbox" name="ids" title="" value="" />
+						<input type="checkbox" name="ids" title="" value="${unit.unitId}" />
 					</td>
 					<td>
 						${unit.unitName}
@@ -119,7 +121,7 @@
 						${unit.unitValue}
 					</td>
 					<td>
-						编辑
+						<a href="javascript:void(0)" onclick="updateUnit('${unit.unitId}')">修改</a>
 					</td>
 				</tr>
 			</#list>

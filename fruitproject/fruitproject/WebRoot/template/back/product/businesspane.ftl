@@ -8,6 +8,7 @@
 		<link href="css/qtip.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/qtip.js"></script>
 		<script language="JavaScript" type="text/javascript" src="js/norm.js"></script>
 		<link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -24,7 +25,7 @@
 				<span class="addIcon">&nbsp;</span>添加
 			</a>
 			<div class="buttonWrap">
-				<a href="javascript:;" id="deleteButton" class="iconButton disabled">
+				<a href="javascript:;" id="deleteButton" class="iconButton disabled" onClick="delFun('delbusinessunit.do');">
 					<span class="deleteIcon">&nbsp;</span>删除
 				</a>
 				<a href="javascript:;" id="refreshButton" class="iconButton">
@@ -85,7 +86,7 @@
 			<#list businesses as business>
 				<tr>
 					<td>
-						<input type="checkbox" name="ids" title="" value="" />
+						<input type="checkbox" name="ids" title="" value="${business.businessId}" />
 					</td>
 					<td>
 						${business.businessName}
@@ -94,7 +95,7 @@
 						<a href="javascript:void(0)" rel="getbusinessbyid.do?businessId=${business.businessId}" title="名片" alt="名片" class="detail">商家名片</a>
 					</td>
 					<td>
-						编辑
+						<a href="updatebusinesspane.do?businessId=${business.businessId}">编辑</a>
 					</td>
 				</tr>
 			</#list>

@@ -9,6 +9,7 @@
 		<link href="css/common.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript" src="js/input.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
 	</head>
 	<body onload="displayAddBtn('menuName','addmenu');">
 		<div class="path">

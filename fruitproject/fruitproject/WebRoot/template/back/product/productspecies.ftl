@@ -5,11 +5,10 @@
 		<title>商品种类管理</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<link href="css/norm.css" rel="stylesheet" type="text/css" />
-		<link href="css/qtip.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" type="text/javascript" src="js/jquery-1.6.2.js"></script>
-		<script language="JavaScript" type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.js"></script>
-		<script language="JavaScript" type="text/javascript" src="js/qtip.js"></script>
+		<script language="JavaScript" type="text/javascript" src="js/norm.js"></script>
 		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript" src="js/list.js"></script>
 
 	</head>
